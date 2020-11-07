@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Análisis Exploratorio de Datos</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Katherine Morales" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Análisis Exploratorio de Datos
+### Katherine Morales
+### Python weekend <br>
+<center>
+<img src=python1.png>
+
+---
+
+
+
+
+
+class: header_background
+
+# Importancia del análisis de datos. 
+
+
+![](https://bigdataanalyticsnews.com/wp-content/uploads/2019/12/data-analyst.png)
+
+
+---
+
+- Los datos se recogen en todas partes a nuestro alrededor 
+
+--
+
+&lt;center&gt;&lt;img src="https://lh3.googleusercontent.com/proxy/e_CB7p64NL_yra3RO-uOKFsgw0lXYRvILijGctWUA9gPFfABKANdt_-vhvxASXGK0hLZ2-1wuUIOUCKB_OqY2g5GZoTQ_f_pu8Roskqz6Vs-5SHuO5S1F_xjGbGX_ycLiJ8ytQ"&gt;&lt;/center&gt;
+
+--
+
+- El análisis de datos  nos ayuda a desbloquear la información 
+
+--
+
+- *Ejemplo:* ¿Cómo decidir el precio del coche?
+
+
+---
+
+class: center header_background inverse
+ 
+ &lt;font size="25"
+          color="#035AA6"&gt; 
+            Paquetes de Python  
+&lt;/font&gt; 
+
+&lt;img src=python1.png&gt;
+---
+class: header_background
+
+#  Librerías de computación científica
+
+--
+- Pandas
+
+&lt;center&gt;&lt;img src="https://miro.medium.com/max/481/1*cxfqR8NAj8HGal8CVOZ7hg.png" width="200" height="100"&gt;&lt;/center&gt;
+
+--
+
+- Numpy
+
+&lt;center&gt;&lt;img src="https://technopremium.com/blog/wp-content/uploads/2019/07/numpy-logo-2-1200x597.png" width="200" height="100"&gt;&lt;/center&gt;
+
+--
+
+  - Spicy
+
+&lt;center&gt;&lt;img src="https://hackernoon.com/hn-images/0*Vj7U_XyrCh3gGgi-"  width="200" height="100"&gt;&lt;/center&gt;
+
+
+---
+class: header_background
+
+# Librerías para la visualización 
+
+--
+
+- Matplotlib
+
+&lt;center&gt;&lt;img src="https://miro.medium.com/max/480/1*jbFlelTa17_ZJk5pv4-32w.jpeg" width="200" height="100"&gt;&lt;/center&gt;
+
+--
+
+- Seaborn
+
+&lt;center&gt;&lt;img src="https://seaborn.pydata.org/_static/logo-wide-lightbg.svg" width="200" height="100"&gt;&lt;/center&gt;
+
+---
+class: header_background
+
+# Librerías algorítmicas
+
+--
+
+- Scikit - Learn 
+&lt;center&gt;&lt;img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Scikit_learn_logo_small.svg/1200px-Scikit_learn_logo_small.svg.png" width="200" height="100"&gt;&lt;/center&gt;
+
+--
+
+- Stat Models
+
+&lt;center&gt;&lt;img src="https://www.statsmodels.org/stable/_images/statsmodels-logo-v2-horizontal.svg" width="200" height="100"&gt;&lt;/center&gt;
+
+---
+class: header_background
+
+# Entender los datos
+
+- Entender nuestros datos antes de hacer el análisis
+
+--
+
+- Debemos checar: 
+  - Tipos de datos
+  - Distribución de los datos
+
+--
+
+- Lista potencial de problemas con los datos
+
+---
+
+
+class: center header_background inverse
+ 
+ &lt;font size="25"
+          color="#035AA6"&gt; 
+            ¿Por qué analizar el tipo de datos?  
+&lt;/font&gt; 
+
+&lt;img src=https://i.pinimg.com/originals/fb/03/29/fb03295c0e878ee9e2d215303ee09434.gif&gt;
+---
+class: header_background
+
+# Razones
+
+- Pandas asigna automáticamente tipos basados en en la codificación que detecta de la tabla de datos original.
+
+--
+
+- Permite al usuario ver qué funciones de Python se pueden aplicar a una columna específica.
+
+---
+
+class: header_background
+
+# Usando pandas
+
+--
+
+- Leemos nuestro archivo 
+
+
+```python
+import panda as pd
+
+df = pd.read_csv(filename, names = headers)
+```
+
+--
+
+- Visualizar el tipo de datos
+
+
+```python
+df.dtypes
+```
+
+--
+
+- Resumen estadístico de los datos: principales estadísticos  
+
+
+```python
+df.describe()
+```
+
+Puede describir solo variables númericas
+
+--
+
+- Resumen estadístico completo 
+
+
+```python
+df.describe(include = "all")
+```
+
+
+
+---
+
+
+class: center header_background inverse
+ 
+ &lt;font size="25"
+          color="#035AA6"&gt; 
+            PRE-PROCESAMIENTO DE DATOS 
+&lt;/font&gt; 
+
+&lt;img src=https://thelastbyteblog.files.wordpress.com/2020/06/data-scrubbing-service.gif?w=380&gt;
+
+---
+
+- Es el proceso de convertir o mapear datos de una forma cruda a otro formato para que esté listo para su análisis posterior.
+
+--
+
+- El preprocesamiento de datos a menudo se llama limpieza de datos 
+
+--
+
+## Objetivos 
+
+--
+
+- Identificar valores perdidos
+
+--
+
+- Normalización: las diferentes columnas de datos numéricos pueden tener rangos muy diferentes y comparación directa a menudo no es significativa. 
+
+--
+
+- Data Binning: crear variables categóricas  a partir de variables numéricas
+
+--
+
+- Transformar variables categóricas a numéricas para utilizarlas en algún modelo 
+
+---
+
+
+class: center header_background inverse
+ 
+ &lt;font size="25"
+          color="#035AA6"&gt; 
+            Lidiando con datos perdidos en Python
+&lt;/font&gt; 
+
+&lt;img src=https://miro.medium.com/max/500/1*Yko3Fem6Tzi74OkYm9Imqg.jpeg&gt;
+
+---
+class: header_background
+
+# Datos perdidos
+
+--
+
+- Cuando no se almacena ningún valor de datos para la entidad para una observación en particular, decimos que esta característica tiene un valor que falta.
+
+- *N/A* , "", "?" or 0
+
+--
+
+## ¿Cómo lidiar con estos datos?
+
+Hay varias maneras de lidiar con estos valores (independientemente de Python o R o cualquier otra herramienta que se use)
+
+--
+
+Las situaciones más comunes son:
+
+- Fuente de datos: verificar si la persona o grupo que recogió los datos pueden volver atrás y encontrar cuál debería ser el valor real. 
+
+---
+
+## ¿Cómo lidiar con estos datos?
+
+- Eliminar los datos donde se encuentra ese valor perdido:
+  -  Eliminar la variable
+  - Eliminar la entrada (obsevación)
+
+
+--
+
+- Reemplazar los datos perdidos
+  - Reemplazarlos con su media (valor promedio)
+  
+--
+
+¿ Y qué hago con los valores que no son numéricos?
+
+--
+
+  - Reemplazarlos por su frecuencia: el más común
+--
+
+  - Reemplazarlos con otros valores
+
+--
+
+- Dejarlos como datos perdidos
+  
+---
+
+class: header_background
+
+# Hacerlo en Python
+
+
+
+```python
+dataframe.dropna()
+```
+
+--
+- Puede elegir eliminar filas o columnas que contienen valores faltantes como NaN.
+
+
+
+```python
+df.dropna(subset = ["variable"], axis = 0, inplace = True)
+```
+
+--
+
+  - axis = 0 : elimina la columna completa
+  - axis = 1 : elimina la columna entera
+
+--
+
+  - implace=True:  permite que la modificación se realice directamente en el conjunto de datos
+
+--
+
+Es equivalente a esta línea de código:
+
+
+```python
+df = df.dropna(subset = ["variable"], axis = 0)
+```
+   
+
+---
+
+&lt;center&gt;&lt;img src=https://media.tenor.com/images/ba2c5bddfb1f45e2a7916ad1d7dfcc74/tenor.gif width="550" height="400"&gt;&lt;/center&gt;
+
+
+
+```python
+df.dropna(subset = ["variable"], axis = 0)
+```
+
+Esta línea de código no modifica los  datos, pero es una _"buena manera"_ de asegurarse de que está realizando la operación correcta.
+
+--
+
+Más información: [http://pandas-pydata.org](http://pandas-pydata.org)
+
+---
+
+class: header_background
+
+# Reemplazar  valores perdidos en Python
+
+--
+
+
+```python
+dataframe.replace(missing_value, new_value)
+```
+
+Contexto: La variable _"variable"_  tiene valores perdidos y queremos reemplazarlo por la media.
+
+--
+
+1. Calcular la media
+
+
+```python
+media_variable = df["variable"].mean()
+```
+
+--
+
+2. Reemplazar los valores perdidos
+
+
+```python
+df["variable"].replace(np.nan, media_variable)
+```
+
+---
+
+
+class: center header_background inverse
+ 
+ &lt;font size="25"
+          color="#035AA6"&gt; 
+            Formato de datos en Python
+&lt;/font&gt; 
+
+&lt;img src=python1.png&gt;
+
+---
+class: header_background
+
+# Cálculos en una columna entera
+
+- Ejemplo: Transformar de kilómetros a metros
+
+
+```python
+df["variable"] = df["variable"]*1000
+```
+
+--
+
+- Renombrar la variable:
+
+
+```python
+df.rename(columns={"variable" : "variable_transf"}, inplace = True)
+```
+
+---
+
+class: header_background
+
+# Tipo de datos 
+
+
+&lt;center&gt;&lt;img src= tipos.png width="450" height="250"&gt;&lt;/center&gt;
+
+
+
+```python
+df.dtypes
+```
+
+--
+
+- Convertir una variable a otro tipo de dato
+
+
+```python
+df["variable"] = df["variable"].astype("int") 
+```
+
+---
+
+
+
+class: center header_background inverse
+ 
+ &lt;font size="25"
+          color="#035AA6"&gt; 
+            Normalización en Python
+&lt;/font&gt; 
+
+&lt;img src=python1.png&gt;
+
+---
+
+class: header_background
+
+# Normalización
+
+- Tenemos dos variables:
+  - edad: 18 - 70
+  - ingreso: (pesos) 100 000 - 5000 000
+
+--
+
+Posibles inconvenientes:
+
+- Tienen rangos diferentes.
+- Dificil de comparar.
+- La variable ingreso podría influenciar mucho más el resultado (regresión lineal). Esto no necesariamente va a implicar que sea importante como predictor  
+
+--
+
+Solución Posible: normalizar las variables de 0 a 1.
+
+---
+
+¿Qué obtengo después de la normalización?
+
+- Rangos similares
+- Influencia similar en los modelos
+
+--
+
+Ténicas:
+
+- Simple Feature Scaling
+
+
+```python
+df["variable"] = df["variable"]/ df["variable"].max()
+```
+
+--
+
+- Min-Max
+
+
+```python
+df["variable"] = (df["variable"] -df["variable"].min())/ (df["variable"].max() -df["variable"].min())
+```
+--
+
+- Z-score (standar score)
+
+
+```python
+df["variable"] = (df["variable"] - df["variable"].mean())/ df["variable"].std()
+```
+
+
+---
+
+
+
+class: center header_background inverse
+ 
+ &lt;font size="25"
+          color="#035AA6"&gt; 
+            Binning en Python
+&lt;/font&gt; 
+
+&lt;img src=python1.png&gt;
+
+---
+class: header_background
+
+# Binning
+
+- Agrupar valores en "bins"
+
+
+- "Convertir" varibles numéricas a categóricas
+
+
+- A veces puede mejorar el modelo
+
+--
+
+- Ejemplo: edad en diferentes grupos
+    - G1: edad de 0 a 18
+    - G2: edad de 19 a 40
+    - G3: edad de  41 en adelante
+    
+---
+
+Utilizamos la función pandas __cut__
+para segmentar y ordenar los valores de datos en bins. 
+
+
+```python
+import numpy as np
+
+numero_cortes= 4
+
+bins =np.linspace(df["variable"].min() , df["variable"].max(), numero_cortes) 
+
+nombre_grupos = ["Grupo 1", "Grupo 2", "Grupo 3"]
+
+
+df["variable_grupos"] = pd.cut(df["variable"] , bins ,//
+labels =nombre_grupos, include_lowest =True)
+```
+
+
+---
+
+
+
+class: center header_background inverse
+ 
+ &lt;font size="25"
+          color="#035AA6"&gt; 
+            Variables Categóricas a Variables Cuantitativas en Python
+&lt;/font&gt; 
+
+&lt;img src=python1.png&gt;
+
+---
+
+## Problema
+
+--
+
+- Tener una variable en formato texto
+- Muchos modelos estadísticos no aceptan este tipo de variables como __input__
+
+- Ejemplo: Género: ["Femenino", "Masculino","Masculino", "Masculino","Femenino", "Masculino" ]
+--
+
+##Solución
+
+- Añadir variables __dummy__ para cada categoría
+- Añadir 0 o 1 (one -hot -encoding)
+
+---
+class: header_background
+
+# En python
+
+
+```python
+pd.get_dummies(df["variable"])
+```
+
+--
+
+&lt;img src=https://etlpoint.com/wp-content/uploads/2020/07/77.png&gt;
+
+---
+
+class: center header_background inverse
+ 
+ &lt;font size="25"
+          color="#035AA6"&gt; 
+            Descriptivos estadísticos en Python
+&lt;/font&gt; 
+
+&lt;img src=python1.png&gt;
+
+---
+
+##  Frecuencias: variables categóricas
+
+
+```python
+df["variable"].value_counts().to_frame()
+```
+
+--
+
+## Box Plots
+  - Permiten realizar comparaciones entre grupos
+  - Ver puntos atípicos
+  - También ver la distribución y el sesgo de los datos.
+
+&lt;center&gt;&lt;img src =https://miro.medium.com/max/18000/1*2c21SkzJMf3frPXPAR_gZA.png width="250" height="150"&gt;&lt;/center&gt;
+
+---
+ 
+En Python:
+
+
+
+```python
+import seaborn as sns
+tips = sns.load_dataset("tips")
+ax = sns.boxplot(x="day", y="total_bill", data=tips)
+ax
+```
+
+
+&lt;center&gt;&lt;img src =im1.png width="550" height="350"&gt;&lt;/center&gt;
+
+
+---
+
+## Scatter Plot:
+
+- Variables continuas
+- Entender relaciones entre variables
+- Cada observación es representada por un punto
+- Variable predictiva: x-axis &amp;  target: y-axis
+
+
+```python
+df = pd.DataFrame([[5.1, 3.5, 0], [4.9, 3.0, 0], [7.0, 3.2, 1],
+[6.4, 3.2, 1], [5.9, 3.0, 2]],columns=['length', 'width', 'species'])
+df.plot.scatter(x='length',y='width',c='DarkBlue')
+```
+
+
+&lt;center&gt;&lt;img src =im2.png width="350" height="260"&gt;&lt;/center&gt;
+
+---
+
+### Correlaciones
+
+--
+
+- Es una métrica estadística para que mide hasta qué punto diferentes variables son interdependientes.
+- En otras palabras, cuando miramos dos variables a lo largo del tiempo, si una variable cambia __¿cómo afecta esto al cambio en la otra variable?__
+
+--
+
+- En Python:
+
+
+```python
+tips = sns.load_dataset("tips")
+ax = sns.regplot(x="total_bill", y="tip", data=tips)
+```
+
+
+&lt;center&gt;&lt;img src =im3.png width="350" height="260"&gt;&lt;/center&gt;
+
+---
+
+class: center header_background inverse
+ 
+ &lt;font size="25"
+          color="#035AA6"&gt; 
+            Manos a la obra
+&lt;/font&gt; 
+
+&lt;img src=https://www.yorokobu.es/src/uploads/2014/03/yes.gif&gt;
+
+---
+
+## GOOGLE COLAB
+
+&lt;center&gt;&lt;img src =https://amitness.com/images/colab-run-few-lines.gif width="350" height="260"&gt;&lt;/center&gt;
+
+
+- Colab es un servicio cloud, basado en los Notebooks de Jupyter, que permite el uso gratuito de las GPUs y TPUs de Google, con librerías como: Scikit-learn, PyTorch, TensorFlow, Keras y OpenCV. 
+-  Se pueden crear notebooks o importar los que ya tengamos creados, además de compartirlos y exportarlos cuando queramos.
+- Trabajar con información contenida en nuestro propio Google Drive
+
+
+---
+
+# Empezando a trabajar con Colab
+
+&lt;center&gt;&lt;img src =https://www.datahack.es/wp-content/uploads/2019/06/introducci%C3%B3n-google-colab-data-science-1.jpg width="450" height="360"&gt;&lt;/center&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
